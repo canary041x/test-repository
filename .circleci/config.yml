@@ -1,0 +1,46 @@
+version: 2
+
+jobs:
+  deploy-slackbot:
+    docker:
+      - image: hashicorp/terraform
+        environment:
+          TERM: xterm
+    steps:
+      - checkout
+      # - run:
+      #     name: Install pip
+      #     command: |
+      #       apk --update-cache add \
+      #         python3-dev \
+      #         py3-pip \
+      #         build-base \
+      #         libffi-dev
+      # - run:
+      #     name: Install jira for python
+      #     command: |
+      #       pip3 install jira -t ./
+      #     working_directory: ./app
+      # - run:
+      #     name: Install jira for python
+      #     command: |
+      #       pip3 install jira -t ./
+      #     working_directory: ./app_gcp
+      - run:
+          name: Deploy slackbot by terraform
+          command: |
+            cd environment/prod
+            terraform init
+            terraform validate
+            terraform fmt
+            terraform plan
+            terraform apply -auto-approve
+          working_directory: ./
+workflows:
+  version: 2
+  slackbot:
+    jobs:
+      - deploy-slackbot:
+          filters:
+            branches:
+              only: master
