@@ -1,0 +1,28 @@
+version: 2
+
+jobs:
+  deploy-slackbot:
+    docker:
+      - image: hashicorp/terraform
+        environment:
+          TERM: xterm
+    steps:
+      - checkout
+      - run:
+          name: Deploy slackbot by terraform
+          command: |
+            cd environment/prod
+            terraform init
+            terraform validate
+            terraform fmt
+            terraform plan
+            terraform apply -auto-approve
+          working_directory: ./
+workflows:
+  version: 2
+  slackbot:
+    jobs:
+      - deploy-slackbot:
+          filters:
+            branches:
+              only: circleci-project-setup

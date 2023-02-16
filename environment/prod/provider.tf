@@ -8,6 +8,6 @@ terraform {
         region  = "ap-northeast-1"
         bucket  = "test-terraform-canary041x"
         key     = "terraform.tfstate"
-        encript = true
+        encrypt = true
     }
 }
