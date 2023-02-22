@@ -25,7 +25,7 @@ variable "bucket_name" {
 
 variable "object_key" {
     description = "work_listのアップロード先のオブジェクトキー"
-    default     = "~/work_list.txt"
+    default     = "work_list.txt"
 }
 
 variable "work_list_file" {
