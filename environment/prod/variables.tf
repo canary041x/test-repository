@@ -13,7 +13,22 @@ variable "subnet_ids" {
     default     = ["subnet-0749e26d7b1f43771"]
 }
 
-variable "security_group_id" {
+variable "security_group_ids" {
     description = "セキュリティグループID"
     default     = ["sg-0bdea1ba44a522062"]
+}
+
+variable "bucket_name" {
+    description = "バケット名"
+    default     = "test-terraform-canary041x"
+}
+
+variable "object_key" {
+    description = "work_listのアップロード先のオブジェクトキー"
+    default     = "~/work_list.txt"
+}
+
+variable "work_list_file" {
+    description = "github上のwork_listファイル"
+    default     = "../../data/prod/work_list.txt"
 }

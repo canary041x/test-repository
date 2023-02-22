@@ -1,3 +1,11 @@
+resource "aws_s3_bucket_object" "your_original_resource_name" {
+
+  bucket = var.bucket_name
+  key    = var.object_key
+  source = var.work_list_file
+  etag   = filemd5(var.work_list_file)
+}
+
 data "archive_file" "layer_file_requests" {
   type        = "zip"
   source_dir  = "../../layer/layer_requests"
@@ -45,5 +53,4 @@ resource "aws_lambda_function" "function" {
     subnet_ids         = var.subnet_ids
     security_group_ids = var.security_group_ids
   }
-
 }
